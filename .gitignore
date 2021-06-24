@@ -1,0 +1,8 @@
+__pycache__/
+logdir/
+logdir_eval/
+*.gif
+*.json
+playground.py
+.idea
+.DS_Store

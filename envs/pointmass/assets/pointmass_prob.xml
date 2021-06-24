@@ -1,0 +1,44 @@
+<mujoco model="pointmass">
+   <compiler inertiafromgeom="true" angle="radian" coordinate="local" />
+   <option timestep="0.01" gravity="0 0 0" iterations="100" integrator="Euler" />
+   <default>
+      <joint armature="0.004" damping="10" limited="true" />
+      <geom friction=".5 .1 .1" margin="0.002" condim="1" contype="1" conaffinity="1" rgba="1.0 0.25 0.22 1" />
+   </default>
+    <visual>
+        <headlight ambient="0.4 0.4 0.4"/>
+    </visual>
+
+
+   <worldbody>
+		<!--<light diffuse="2. 2. 2." pos="0 0 3" dir="0 0 -1"/>-->
+
+      <!-- cameras -->
+      <camera name="ebm_custom" pos="0 0 2" quat='1 0 0 0' fovy='60'/>
+
+		<body name="robot" pos="0 0 0">
+			<geom name="robot_geom"  type="sphere" rgba="0.6 0.6 0.6 1" pos="0 0 0" size="0.05" />
+            <site name="site_pm" type="sphere" rgba="0 0 1 1" pos="0 0 0" size="0.1" />
+
+			<joint name="robot_joint_x" type="slide" pos="0 0 0" axis="1 0 0" range="-1 1" />
+			<joint name="robot_joint_y" type="slide" pos="0 0 0" axis="0 1 0" range="-1 1" />
+		</body>
+
+
+		<geom type="plane" rgba="1 1 1 1" pos="0. 0. -0.25" size="0 0 0.01" />
+		<site name="target1" type="sphere" rgba="0.1 0.1 0.1 0.5" pos="-0.8 0.7 0" size="0.25" />
+		<site name="target2" type="sphere" rgba="0.1 0.1 0.1 0.5" pos="0.8 0.7 0" size="0.25" />
+    </worldbody>
+
+   <actuator>
+      <!-- <motor joint="robot_joint_x"  ctrlrange="-1.0 1.0" ctrllimited="true" gear="20" />
+      <motor joint="robot_joint_y" ctrlrange="-1.0 1.0" ctrllimited="true" gear="20" /> -->
+
+      <position name="actuator_x" joint="robot_joint_x" ctrlrange="-1   1" kp="100"/>
+      <position name="actuator_y" joint="robot_joint_y" ctrlrange="-1   1" kp="100"/>
+
+      <!-- <velocity name="actuator_x" joint="robot_joint_x" ctrlrange="-1   1" kv="10"/>
+      <velocity name="actuator_y" joint="robot_joint_y" ctrlrange="-1   1" kv="10"/> -->
+
+   </actuator>
+</mujoco>

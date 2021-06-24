@@ -1,0 +1,3 @@
+[submodule "metaworldv2"]
+	path = metaworldv2
+	url = https://github.com/zchuning/metaworld.git

@@ -1,0 +1,138 @@
+mw:
+    train:
+        # Agent
+        steps: 3e5
+        action_repeat: 1
+        collect_sparse_reward: True
+        use_sparse_reward: True
+
+    dense:
+        use_sparse_reward: False
+        normalize_reward: True
+
+    planners:
+        latco:
+            agent: latco
+        latco_no_constraint:
+            agent: latco
+            lm_update_every: -1
+            dyn_loss_scale: 8
+            act_loss_scale: 16
+        latco_no_relax:
+            agent: latco
+            init_lam: 1e8
+        latco_first_order:
+            agent: latco_gd
+            optimization_steps: 5000
+            dyn_loss_scale: 1e4
+            lm_update_every: 5
+            lam_lr: 1.5
+            nu_lr: 1.5
+        image_colloc:
+            agent: image_colloc
+            optimization_steps: 5000
+            gd_lr: 2e-2
+        planet:
+            agent: shooting_cem
+            optimization_steps: 100
+        mppi:
+            agent: shooting_mppi
+            mppi_gamma: 10
+            optimization_steps: 100
+        shooting_gd:
+            agent: shooting_gd
+            optimization_steps: 500
+        shooting_gn:
+            agent: shooting_gn
+            optimization_steps: 100
+            gd_lr: 0.1
+            gn_damping: 1e-2
+        platco:
+            agent: probabilistic_latco
+            optimization_steps: 50
+            dyn_threshold: 1e-2
+            act_threshold: 1e-2
+
+
+    tasks:
+        reach:
+            task: mw_SawyerReachEnvV2
+            planning_horizon: 30
+            mpc_steps: 30
+        button:
+            task: mw_SawyerButtonPressEnvV2
+            planning_horizon: 30
+            mpc_steps: 30
+        window:
+            task: mw_SawyerWindowCloseEnvV2
+            planning_horizon: 30
+            mpc_steps: 30
+        drawer:
+            task: mw_SawyerDrawerCloseEnvV2
+            planning_horizon: 30
+            mpc_steps: 30
+        push:
+            task: mw_SawyerPushEnvV2
+            planning_horizon: 50
+            mpc_steps: 25
+        thermos:
+            action_repeat: 2
+            task: mw_SawyerStickPushEnvV2
+            planning_horizon: 50
+            mpc_steps: 25
+            offline_dir: ./logdir/mw_thermos/offline/episodes
+        hammer:
+            action_repeat: 2
+            task: mw_SawyerHammerEnvV2
+            planning_horizon: 50
+            mpc_steps: 25
+            offline_dir: ./logdir/mw_hammer/offline/episodes
+
+dmc:
+    train:
+        # Agent
+        steps: 8e5
+        train_every: 1000
+        train_steps: 100
+        # Environment
+        time_limit: 1000
+        action_repeat: 2
+
+    planners:
+        latco:
+            agent: latco
+            optimization_steps: 100
+            dyn_threshold: 1e-2
+            act_threshold: 1e-2
+        planet:
+            agent: shooting_cem
+            cem_batch_size: 1000
+            cem_elite_ratio: 0.1
+            optimization_steps: 10
+        mppi:
+            agent: shooting_mppi
+            mppi_gamma: 10
+            cem_batch_size: 1000
+            cem_elite_ratio: 0.1
+            optimization_steps: 10
+        shooting_gd:
+            agent: shooting_gd
+            optimization_steps: 100
+        shooting_gn:
+            agent: shooting_gn
+            optimization_steps: 100
+            gd_lr: 0.1
+            gn_damping: 1e-2
+        platco:
+            agent: probabilistic_latco
+            optimization_steps: 50
+            dyn_threshold: 1e-2
+            act_threshold: 1e-2
+
+    tasks:
+        reacher:
+            task: dmc_reacher_easy
+        cheetah:
+            task: dmc_cheetah_run
+        quadruped:
+            task: dmc_quadruped_walk
