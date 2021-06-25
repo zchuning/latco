@@ -79,7 +79,7 @@ python gencmd.py --task mw_reach --method latco --eval True
 Generate plots:
 
 ```
-python utils/plotting.py --indir ./logdir --outdir ./plots --xaxis step --yaxis train/success --bins 3e4
+python plot.py --indir ./logdir --outdir ./plots --xaxis step --yaxis train/success --bins 3e4
 ```
 
 Tensorboard:
@@ -92,7 +92,7 @@ tensorboard --logdir ./logdir
 #### Troubleshooting
 
 
-By default, the mujoco rendering for Sparse MetaWorld will use glfw. With egl rendering, gpu 0 will be used by default. You can change these with the following environment variables 
+By default, the mujoco rendering for Sparse MetaWorld will use glfw. With egl rendering, gpu 0 will be used by default. You can change these with the following environment variables
 ```
 export MUJOCO_RENDERER='egl'
 export GL_DEVICE_ID=1
@@ -108,25 +108,25 @@ pip install mujoco-py --no-cache-dir --no-binary :all: --no-build-isolation
 
 ## Code structure
 - `latco.py` contains the LatCo agent. It inherits `planning_agent`.
+- `planners/probabilistic_latco.py` contains the Gaussian LatCo agent. It inherits `planning_agent`.
 - `planners/gn_solver.py` is a Gauss-Newton optimizer which leverages the block-tridiagonal structure of the Jacobian to speed up computation. This file is currently unavailable as it is going through the open-sourcing process. It will be available shortly.
-- `envs/sparse_metaworld.py` is the wrapper for the Sparse MetaWorld benchmark. The benchmark itself is a submodule `metaworldv2`.
 - `base_agent.py` is a barebone agent with an RSSM model, modified from the Dreamer agent. `planning_agent.py` inherits `base_agent` and is inherited by all methods in `planners`.
-- `platco.py` contains the Gaussian LatCo agent. It inherits `planning_agent`.
 - `planners` contains planning agents such as shooting cem, shooting gd, and a few other variants.
+- `envs/sparse_metaworld.py` is the wrapper for the Sparse MetaWorld benchmark. The benchmark itself is a submodule `metaworldv2`.
 - `envs/pointmass/pointmass_prob_env.py` is the pointmass lottery task.
 
 #### Using Sparse MetaWorld environments
 
-**WARNING!** The Sparse MetaWorld environments by default output dense reward. The sparse reward is in `info['success']`. A simple-to-use standalone environment code that outputs sparse reward is [here](https://github.com/zchuning/metaworld), please see usage instructions by that link. 
+**WARNING!** The Sparse MetaWorld environments by default output dense reward. The sparse reward is in `info['success']`. A simple-to-use standalone environment code that outputs sparse reward is [here](https://github.com/zchuning/metaworld), please see usage instructions by that link.
 
 #### Adding new environments
 
-See `wrappers.py` as well as `envs/sparse_metaworld.py`, `envs/pointmass/pointmass_prob_env.py` for examples on how to add new environments. We follow a simple gym-like interface from the Dreamer repo. 
+See `wrappers.py` as well as `envs/sparse_metaworld.py`, `envs/pointmass/pointmass_prob_env.py` for examples on how to add new environments. We follow a simple gym-like interface from the Dreamer repo.
 
-Note you can also train our agent entirely offline on an existing dataset of episodes. To do this, use the `--offline_dir` argument to point to the dataset and set `--pretrain` to the desired number of training steps. 
+Note you can also train our agent entirely offline on an existing dataset of episodes. To do this, use the `--offline_dir` argument to point to the dataset and set `--pretrain` to the desired number of training steps.
 
-## Bibtex 
-If you find this code useful, please cite: 
+## Bibtex
+If you find this code useful, please cite:
 
 ```
 @inproceedings{rybkin2021latco,

@@ -47,9 +47,9 @@ def load_runs(args):
         continue
       # If only one task, use search instead of exact match
       exact_task = len(args.tasks) > 1
-      if not any(task == p.pattern if exact_task else p.search(task) for p in args.tasks):
+      if not any(p.search(task) for p in args.tasks):
         continue
-      if not any(method == p.pattern for p in args.methods):
+      if not any(p.search(method) for p in args.methods):
         continue
       if not seed.isdigit():
         continue
