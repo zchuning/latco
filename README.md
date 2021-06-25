@@ -1,6 +1,6 @@
 ## Model-Based Reinforcement Learning via Latent-Space Collocation
 
-#### [[Project Website]](https://orybkin.github.io/latco/) [[Sparse MetaWorld Code]](https://github.com/zchuning/metaworld) [[Talk (5min)]](https://www.youtube.com/watch?v=skc0e4KYNcw)
+####  [[Project Website]](https://orybkin.github.io/latco/) [[Sparse MetaWorld Code]](https://github.com/zchuning/metaworld) [[Talk (5min)]](https://www.youtube.com/watch?v=skc0e4KYNcw) [[Paper]](https://arxiv.org/pdf/2106.13229.pdf)
 
 [Oleh Rybkin*<sup>1</sup>](https://www.seas.upenn.edu/~oleh/), [Chuning Zhu*<sup>1</sup>](https://www.seas.upenn.edu/~zchuning/), [Anusha Nagabandi<sup>2</sup>](https://www.linkedin.com/in/anusha-nagabandi-a4923bba), [Kostas Daniilidis<sup>1</sup>](http://www.cis.upenn.edu/~kostas/), [Igor Mordatch<sup>3</sup>](https://twitter.com/imordatch), [Sergey Levine<sup>4</sup>](https://people.eecs.berkeley.edu/~svlevine/)<br/>
 (&#42; equal contribution)
