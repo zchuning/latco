@@ -56,7 +56,7 @@ Evaluate LatCo agent:
 python eval.py --collect_sparse_reward True --use_sparse_reward True --task mw_SawyerReachEnvV2 --planning_horizon 30 --mpc_steps 30 --agent latco --logdir logdir/mw_reach/latco/0 --logdir_eval logdir_eval/mw_reach/latco/0 --n_eval_episodes 10
 ```
 
-To run the offline+fine-tune experiments, download the released offline data for the [Hammer](https://www.seas.upenn.edu/~zchuning/files/hammer_episodes.zip) and the [Thermos](https://www.seas.upenn.edu/~zchuning/files/thermos_episodes.zip) tasks. Train LatCo agent on the Thermos task with offline data (data path specified by `--offline_dir`):
+To run the offline+fine-tune experiments, download the released offline data for the [Hammer](https://drive.google.com/file/d/1nrswj4p3ZdHjdB6iM5LpHjkZrs2OXNco/view?usp=sharing) and the [Thermos](https://drive.google.com/file/d/1lRSpwrqjQe-KveYZ6XV1OC1V8HIYYJKD/view?usp=sharing) tasks. Train LatCo agent on the Thermos task with offline data (data path specified by `--offline_dir`):
 
 ```
 python train.py --prefill 0 --action_repeat 2 --collect_sparse_reward True --use_sparse_reward True --task mw_SawyerStickPushEnvV2 --planning_horizon 50 --mpc_steps 25 --agent latco --logdir logdir/mw_thermos/latco/0 --offline_dir logdir/mw_thermos/offline/episodes
