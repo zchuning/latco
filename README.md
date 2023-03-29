@@ -109,7 +109,7 @@ pip install mujoco-py --no-cache-dir --no-binary :all: --no-build-isolation
 ## Code structure
 - `latco.py` contains the LatCo agent. It inherits `planning_agent`.
 - `planners/probabilistic_latco.py` contains the Gaussian LatCo agent. It inherits `planning_agent`.
-- `planners/gn_solver.py` is a Gauss-Newton optimizer which leverages the block-tridiagonal structure of the Jacobian to speed up computation. This file is currently unavailable as it is going through the open-sourcing process. It will be available shortly.
+- `planners/gn_solver.py` is a Gauss-Newton optimizer which leverages the block-tridiagonal structure of the Jacobian to speed up computation. 
 - `base_agent.py` is a barebone agent with an RSSM model, modified from the Dreamer agent. `planning_agent.py` inherits `base_agent` and is inherited by all methods in `planners`.
 - `planners` contains planning agents such as shooting cem, shooting gd, and a few other variants.
 - `envs/sparse_metaworld.py` is the wrapper for the Sparse MetaWorld benchmark. The benchmark itself is a submodule `metaworldv2`.
